@@ -8,16 +8,16 @@ Vagrant.configure("2") do |config|
 	config.timezone.value = "UTC"
     config.vm.box = "centos/7"
 
-
+    config.ssh.insert_key = false
     config.vm.network "private_network", ip: "192.168.33.12"
     config.vm.synced_folder ".", "/vagrant", disabled: true
+    config.vm.provision "file", source: "init.sql", destination: "/tmp/mysql/init.sql"
 
     config.vm.provision "docker" do |d|
         d.pull_images "mariadb"
     end
 
     config.vm.provision :shell, path: "docker_run.sh"
-    config.vm.provision "file", source: "init.sql", destination: "/tmp/mysql/init.sql"
 
     config.vm.provision :shell, path: "install.sh"
 
