@@ -1,0 +1,1 @@
+CREATE SCHEMA `tenant-management` CHARACTER SET = 'utf8' COLLATE = utf8_bin;
